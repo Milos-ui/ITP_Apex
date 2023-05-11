@@ -12,7 +12,7 @@ def trainingsplan_post():
     or request.form.get('height') == None or request.form.get('age') == None or request.form.get('gender') == None or request.form.get('fitLevel') == None):
         print('Error: Nicht alle Felder ausgefüllt')
         return render_template('indexTest.html', error='Nicht alle Felder ausgefüllt')
-        
+
     daten = {
         'sportDrop': request.form['sportDrop'],
         'timeInvest': request.form['timeInvest'],
