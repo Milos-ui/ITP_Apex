@@ -8,6 +8,11 @@ daten = {}
 
 @app.post('/trainingsplan')
 def trainingsplan_post():
+    if(request.form.get('sportDrop') == None or request.form.get('timeInvest') == None or request.form.get('goal') == None or request.form.get('weight') == None
+    or request.form.get('height') == None or request.form.get('age') == None or request.form.get('gender') == None or request.form.get('fitLevel') == None):
+        print('Error: Nicht alle Felder ausgefüllt')
+        return render_template('indexTest.html', error='Nicht alle Felder ausgefüllt')
+        
     daten = {
         'sportDrop': request.form['sportDrop'],
         'timeInvest': request.form['timeInvest'],
@@ -18,8 +23,19 @@ def trainingsplan_post():
         'gender': request.form['gender'],
         'fitLevel': request.form['fitLevel']
     }
-    
-    filepath = 'daten/Trainingsplan.pdf'
+
+    if(daten['sportDrop'] == 'Laufen'):
+        filepath = 'daten/Trainingsplan1.pdf'
+    elif(daten['sportDrop'] == 'Radfahren'):
+        filepath = 'daten/Trainingsplan2.pdf'
+    elif(daten['sportDrop'] == 'Schwimmen'):
+        filepath = 'daten/Trainingsplan3.pdf'
+    elif(daten['sportDrop'] == 'Kraftsport'):
+        filepath = 'daten/Trainingsplan4.pdf'
+    else:
+        print('Error: Sportart nicht angegeben')
+        return 'Error: Sportart nicht angegeben'
+
     return send_file(filepath, as_attachment=True)
 
 
