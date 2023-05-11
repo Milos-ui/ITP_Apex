@@ -1,6 +1,6 @@
 var http = require('http');
 var url = require('url');
-daten = {}
+daten = []
 
 http.createServer(function (req, res) {
     const headers = {
@@ -18,26 +18,21 @@ http.createServer(function (req, res) {
     console.log(path)
     //add?sportDrop=1&timeInvest=2&goal=3&weight=4&height=5&age=6&gender=7&fitLevel=8
     if(path == '/post'){
-        daten = {
-            'sportDrop': q.sportDrop,
-            'timeInvest': q.timeInvest,
-            'goal': q.goal,
-            'weight': q.weight,
-            'height': q.height,
-            'age': q.age,
-            'gender': q.gender,
-            'fitLevel': q.fitLevel
-        }
+        daten.add(Daten(q.sportDrop, q.timeInvest, q.goal, q.weight, q.height, q.age, q.gender, q.fitLevel));
     }
+    //get
     else if(path == '/get'){
-        res.end(JSON.stringify(daten));
     }
+    res.end(JSON.stringify(daten));
   }).listen(8080);
 
-function Buch(id, name, autor, jahr, seitenanzahl){
-    this.id = id
-    this.name = name
-    this.autor = autor
-    this.jahr = jahr
-    this.seitenanzahl = seitenanzahl
+function Daten(sportDrop, timeInvest, goal, weight, height, age, gender, fitLevel){
+    this.sportDrop = sportDrop;
+    this.timeInvest = timeInvest;
+    this.goal = goal;
+    this.weight = weight;
+    this.height = height;
+    this.age = age;
+    this.gender = gender;
+    this.fitLevel = fitLevel;
 }
