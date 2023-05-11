@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <div class="navigation">
+
+    <nav>
+      <ul class="nav-links">
+      <div class="logo">
+        <a href="#"><img src="logoTransperent.png" alt="Logo"></a>
+      </div>
+
+        <li id="homeT" style="margin-left:20px;"><a href="#">HOME</a></li>
+        <li id="planT"style="margin-left:20px;"><a href="#">TRAININGSPLAN</a></li>
+        <li id = "specialT"style="margin-left:20px;"><a href="#">INFO</a></li>
+      </ul>
+      <div class="profile">
+        <a href="#">PROFIL</a>
+      </div>
+    </nav>
+    </div>
+    <br><br><br><br><br><br><br><br><br>
+
+
+
+    <!-- Formular -->
+
+    <div class="formularFull">
+      <div class="sportArt">
+        <!-- DropDown Sportart -->
+        <label for="sportDrop"></label>
+        <select class="sportDrop" name="sportDrop">
+            <option value="Kraftsport">Kraftsport</option>
+            <option value="HIIT">HIIT</option>
+            <option value="Kraftausdauer">Kraftausdauer</option>
+            <option value="Anderes">Anderes</option>
+        </select>
+      </div>
+
+      <div class="timeInvest">
+        <label for="timeInput">Wieviele Stunden wollen Sie pro Woche investieren?</label>
+        <input type="number" id="timeInput" name="timeInvest" placeholder="5">
+      </div>
+
+      <div class="goalCheck">
+        <label for="abnehmen">Abnehmen: </label>
+        <input type="radio" name="goal" id="abnehmen" value="abnehmen">
+        <label for="zuhnehmen">Zunehmen: </label>
+        <input type="radio" name="goal" id="zuhnehmen" value="zuhnehmen">
+      </div>
+      <div class="bodyFeatures">
+        <div class="bodyWeight">
+          <label for="weight">Wieviele kg Körpergewicht haben Sie?</label>
+          <input type="number" id="weight" name="weight" placeholder="50">
+        </div>
+
+        <div class="bodyHeight">
+          <label for="height">Wieviele cm Körpergröße haben Sie?</label>
+          <input type="number" id="height" name="height" placeholder="170">
+        </div>
+
+        <div class="bodyAge">
+          <label for="age">Wie alt sind Sie?</label>
+          <input type="number" id="age" name="age" placeholder="20">
+        </div>
+
+        <div class="bodyGender">
+          <label for="female">Frau: </label>
+          <input type="radio" name="gender" id="female" value="female">
+          <label for="male">Mann: </label>
+          <input type="radio" name="gender" id="male" value="male">
+        </div>
+
+        <div class="bodyFitLevel">
+          <label for="fitLevel">Wie schätzen Sie selbst ihr Fitnesslevel ein?</label>
+          <input type="range" name="fitLevel" value="0">
+
+        </div>
+      </div>
+
+    <a href="index2.html"><button type="button" name="button">submit</button></a>
+
+    </div>
+<style media="screen">
+
+
+      #homeT,#planT,#specialT{
+        padding: 0.5rem;
+      }
+
+
+      .navigation{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        z-index: 100;
+      }
+
+
+        nav {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background-color: #000000;
+          color: #fff;
+          padding: 1rem;
+          font-family:Andale Mono, monospace;
+          letter-spacing: 2px;
+        }
+
+        .logo img {
+          height: 50px;
+          filter: grayscale(100%);
+        }
+
+        .nav-links {
+          display: flex;
+          list-style: none;
+
+        }
+
+        .nav-links li a {
+          color: #fff;
+          text-decoration: none;
+          font-size: 1.2rem;
+          border:none;
+          padding: 0.5rem;
+        }
+        .nav-links li a:hover{
+          border: 1px solid #fff;
+        }
+
+        .profile a {
+          color: #fff;
+          text-decoration: none;
+          font-size: 1.2rem;
+          border: none;
+          padding: 0.5rem;
+          margin-right:5rem;
+        }
+        .profile a:hover{
+          border: 1px solid #fff;
+        }
+    </style>
+
+  </body>
+</html>

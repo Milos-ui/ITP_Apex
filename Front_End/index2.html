@@ -1,0 +1,236 @@
+<!-- Navigation Bar -->
+<div class="navigation">
+
+<nav>
+  <ul class="nav-links">
+  <div class="logo">
+    <a href="#"><img src="logoTransperent.png" alt="Logo"></a>
+  </div>
+
+    <li id="homeT" style="margin-left:20px;"><a href="#">HOME</a></li>
+    <li id="planT"style="margin-left:20px;"><a href="#">TRAININGSPLAN</a></li>
+    <li id = "specialT"style="margin-left:20px;"><a href="#">INFO</a></li>
+  </ul>
+  <div class="profile">
+    <a href="#">PROFIL</a>
+  </div>
+</nav>
+</div>
+
+
+
+<!-- Main Header -->
+<header class="main-header">
+  <div class="header-background">
+    <img src="GymGuy.jpg" alt="Header Background Image">
+  </div>
+  <div class="header-content">
+
+    <h1>Dein Körper, Deine Regeln</h1>
+
+
+  </div>
+</header>
+
+
+<!-- Section One -->
+<section class="section-one">
+  <div class="section-one-content">
+    <div class="section-one-left">
+      <img id="imgSectionOne" src="temp2.png" alt="Left Image">
+    </div>
+    <div class="section-one-right">
+      <h2>Section One Title</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at placerat elit. Pellentesque blandit, magna eu pretium suscipit, nulla metus ultricies tellus, vel tincidunt elit felis id leo. Donec posuere mauris eget laoreet eleifend. Donec eu viverra tortor.</p>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+<!-- Section Two -->
+<section class="section-two">
+  <div class="section-two-content">
+    <div class="section-two-left">
+      <h2>Section Two Title</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at placerat elit. Pellentesque blandit, magna eu pretium suscipit, nulla metus ultricies tellus, vel tincidunt elit felis id leo. Donec posuere mauris eget laoreet eleifend. Donec eu viverra tortor.</p>
+    </div>
+    <div class="section-two-right">
+      <img src="logo.jpg" alt="Right Image">
+    </div>
+  </div>
+</section>
+<!-- Impresum -->
+<footer>
+  <div class="impressum">
+    <p>Impressum</p>
+  </div>
+</footer>
+
+
+<!-- Styles -->
+<style>
+  /* Navigation Bar */
+
+.section-one-content{
+  display: flex;
+  justify-content: center;
+  flex-direction:row;
+  align-items:center;
+/*IDEA: width und */
+	object-fit: cover;
+}
+.section-one-left{
+  padding-left:5rem;
+  float: left;
+}
+#imgSectionOne{
+  width:50%;
+  height:50%;
+}
+.section-one-right{
+  width: 50%;
+  float: right;
+}
+
+section-two-content{
+  display: flex;
+  align-items: center;
+}
+.section-two-left{
+  width: 50%;
+   float: left;
+}
+.section-two-right{
+  width: 50%;
+  float: right;
+}
+
+
+
+
+
+
+
+
+
+
+
+  body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+  .main-header{
+    position: relative;
+	width: 100%;
+	height: 100vh;
+  }
+
+.header-background{
+  position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.header-content{
+  position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: white;
+	text-align: center;
+	font-size: 3rem;
+	font-weight: bold;
+	text-shadow: 2px 2px #000000;
+}
+
+
+
+#homeT,#planT,#specialT{
+  padding: 0.5rem;
+}
+
+
+.navigation{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 100;
+}
+
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000000;
+    color: #fff;
+    padding: 1rem;
+    font-family:Andale Mono, monospace;
+    letter-spacing: 2px;
+  }
+
+  .logo img {
+    height: 50px;
+    filter: grayscale(100%);
+  }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+
+  }
+
+  .nav-links li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    border:none;
+    padding: 0.5rem;
+  }
+  .nav-links li a:hover{
+    border: 1px solid #fff;
+  }
+
+  .profile a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    border: none;
+    padding: 0.5rem;
+    margin-right:5rem;
+  }
+  .profile a:hover{
+    border: 1px solid #fff;
+  }
+
+  h1 {
+  font-family: "Arial Black", sans-serif;
+  }
+
+  /* Main Header */
+  .main-header {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header-background img {
+    position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  }
+
+
+</style>
