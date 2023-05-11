@@ -2,6 +2,7 @@ from flask import Flask, send_file
 from flask import render_template
 from flask import request
 from markupsafe import escape
+import json
 app = Flask(__name__)
 daten = {}
 
