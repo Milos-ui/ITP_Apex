@@ -109,19 +109,30 @@
         methods: {
           //TODO: refresh Methode erstellen
           postMessage(){
+                if(!this.checkFields()){
+                  return;
+                }
                 //add?sportDrop=1&timeInvest=2&goal=3&weight=4&height=5&age=6&gender=7&fitLevel=8
-                axios.get('http://localhost:8080/get' + '?' + 
+                let anfrage = 'http://localhost:8080/add?' + 
                 'sportDrop=' + this.sportDrop + 
-                '$timeInvest=' + this.timeInvest +
-                '$goal=' + this.goal + 
-                '$weight=' + this.weight + 
-                '$height=' + this.height +
-                '$gender=' + this.gender +
-                '$age=' + this.age +
-                '$fitLevel=' + this.fitLevel
-                ).then((response) => {
+                '&timeInvest=' + this.timeInvest +
+                '&goal=' + this.goal + 
+                '&weight=' + this.weight + 
+                '&height=' + this.height +
+                '&gender=' + this.gender +
+                '&age=' + this.age +
+                '&fitLevel=' + this.fitLevel;
+                console.log(anfrage);
+                axios.get(anfrage).then((response) => {
                   console.log(response.data);
                 });
+          },
+          //Überprüft ob alle Felder ausgefüllt sind
+          checkFields(){
+            if(this.sportDrop == '' || this.timeInvest == '' || this.goal == '' || this.weight == '' || this.height == '' || this.age == '' || this.gender == '' || this.fitLevel == ''){
+              alert("Bitte füllen Sie alle Felder aus!");
+              return false;
+            }
           },
           getMessage(){
             axios.get('http://localhost:8080/get')
