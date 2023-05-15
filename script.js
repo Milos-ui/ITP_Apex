@@ -1,6 +1,6 @@
 var http = require('http');
 var url = require('url');
-daten = []
+alleDaten = []
 
 http.createServer(function (req, res) {
     const headers = {
@@ -17,13 +17,15 @@ http.createServer(function (req, res) {
     var path = u.pathname
     console.log(path)
     //add?sportDrop=1&timeInvest=2&goal=3&weight=4&height=5&age=6&gender=7&fitLevel=8
-    if(path == '/post'){
-        daten.add(Daten(q.sportDrop, q.timeInvest, q.goal, q.weight, q.height, q.age, q.gender, q.fitLevel));
+    if(path == '/add'){
+      console.log("Mein kommentar: Methode-add");
+      d = new Daten(q.sportDrop, q.timeInvest, q.goal, q.weight, q.height, q.age, q.gender, q.fitLevel);
+      alleDaten.push(d);
     }
     //get
     else if(path == '/get'){
     }
-    res.end(JSON.stringify(daten));
+    res.end(JSON.stringify(alleDaten));
   }).listen(8080);
 
 function Daten(sportDrop, timeInvest, goal, weight, height, age, gender, fitLevel){
