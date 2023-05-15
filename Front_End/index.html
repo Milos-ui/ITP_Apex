@@ -1,4 +1,224 @@
 <!-- Navigation Bar -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      /*Allgemein*/
+      body {
+      margin: 0;
+      padding: 0;
+      /*box-sizing: border-box;*/
+     }
+
+
+
+     
+      /*Navigationsleiste*/
+    
+    
+      nav {
+        position: fixed;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        /*top: 0;
+        left: 0;*/
+        width: 100%;
+        z-index: 100;
+        
+        background-color: #000000;
+        color: #fff;
+        padding: 1rem;
+        font-family:Andale Mono, monospace;
+        letter-spacing: 2px;
+      }
+    
+      
+    
+      .nav-links {
+        display: flex;
+        list-style: none;
+      }
+      
+      .logo img {
+        height: 50px;
+        filter: grayscale(100%);
+      }
+    
+      .nav-links li a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.2rem;
+        padding: 0.5rem;
+      }
+
+      .nav-links li a:hover{
+        border: 1px solid #fff;
+      }
+
+      #homeT,#planT,#specialT{
+        padding: 0.5rem;
+      }
+    
+      .profile a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.2rem;
+        padding: 0.5rem;
+        margin-right:5rem;
+      }
+      .profile a:hover{
+        border: 1px solid #fff;
+      }
+
+
+
+      /*Header*/
+
+      .main-header {
+        height: 100vh;
+      }
+      
+      .header-background{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        /*object-fit: cover;*/
+      }
+
+      .header-content{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        text-align: center;
+        font-size: 3rem;
+        font-weight: bold;
+        text-shadow: 2px 2px #000000;
+        font-family: "Arial Black", sans-serif;
+      }
+    
+      .header-background img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+
+     /*Section 1*/ 
+
+     .section-one-content{
+      display: flex;
+      align-items: center;
+    }
+    .section-one-left{
+      width: 50%;
+      float: left;
+    }
+    .section-one-left img{
+      width: 80%;
+      padding:10%;
+      padding-top: 15%;
+      padding-left: 10%;
+    }
+    .section-one-right{
+      width: 40%;
+      float: right;
+      font-family: Candara;
+      
+      text-align: center;
+      padding-right: 20px;
+    }
+
+    #section-one-right-p{
+      color: rgb(98, 97, 97);
+      font-size: 20px;
+    }
+    .section-one-right h2{
+      color: rgb(82, 80, 80);
+      font-size: 40px;
+    }
+
+    
+    /*.section-one-content{
+      display: flex;
+      flex-direction:row;
+      align-items:center;
+    /*IDEA: width und 
+      object-fit: cover;
+    }
+    .section-one-left{
+      padding-left:5rem;
+      float: left;
+      width: 50%;
+      
+    }
+    #imgSectionOne{
+      width:50%;
+      height:50%;
+    }
+    .section-one-right{
+      width: 50%;
+      float: right;
+    
+    }*/
+
+    /*Section 2*/ 
+    /*
+    .section-two-content{
+      display: flex;
+      align-items: center;
+    }
+    .section-two-left{
+      width: 50%;
+       float: left;
+    }
+    .section-two-right{
+      width: 50%;
+      float: right;
+    }
+    */
+
+
+    .section-two-content{
+      display: flex;
+      align-items: center;
+    }
+    .section-two-right{
+      width: 50%;
+      padding-right: 5%;
+    }
+    .section-two-right img{
+      width: 80%;
+      padding:10%;
+
+      
+    }
+    .section-two-left{
+      width: 50%;
+      font-family: Candara;
+      text-align: center;
+     
+    }
+
+    #section-two-left-p{
+      color: rgb(98, 97, 97);
+      font-size: 20px;
+      
+    }
+    .section-two-left h2{
+      color: rgb(82, 80, 80);
+      font-size: 40px;
+    }
+
+    </style>
+
+  </head>
+
+<body>
 <div class="navigation">
 
 <nav>
@@ -8,11 +228,11 @@
   </div>
 
     <li id="homeT" style="margin-left:20px;"><a href="#">HOME</a></li>
-    <li id="planT"style="margin-left:20px;"><a href="#">TRAININGSPLAN</a></li>
+    <li id="planT"style="margin-left:20px;"><a href="trainingsplan.html">TRAININGSPLAN</a></li>
     <li id = "specialT"style="margin-left:20px;"><a href="#">INFO</a></li>
   </ul>
   <div class="profile">
-    <a href="#">PROFIL</a>
+    <a href="login.html">PROFIL</a>
   </div>
 </nav>
 </div>
@@ -25,10 +245,7 @@
     <img src="GymGuy.jpg" alt="Header Background Image">
   </div>
   <div class="header-content">
-
     <h1>Dein Körper, Deine Regeln</h1>
-
-
   </div>
 </header>
 
@@ -37,29 +254,31 @@
 <section class="section-one">
   <div class="section-one-content">
     <div class="section-one-left">
-      <img id="imgSectionOne" src="temp2.png" alt="Left Image">
+      <img id="imgSectionOne" src="sectionOneImg.png" alt="Left Image">
     </div>
     <div class="section-one-right">
-      <h2>Section One Title</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at placerat elit. Pellentesque blandit, magna eu pretium suscipit, nulla metus ultricies tellus, vel tincidunt elit felis id leo. Donec posuere mauris eget laoreet eleifend. Donec eu viverra tortor.</p>
+      <h2>Believe in your dreams!</h2>
+      <p id="section-one-right-p">Sie haben den ersten Schritt gemacht, um Ihre Fitnessziele zu erreichen, indem Sie hierher gekommen sind. Bleiben Sie jetzt hier und erstellen Sie Ihre maßgeschneiderten <a href="trainingsplan.html">Trainingspläne</a> Wir bieten Ihnen die Möglichkeit, Ihre Workouts auf Ihre Bedürfnisse und Ziele abzustimmen, um sicherzustellen, dass Sie Fortschritte machen und das Beste aus Ihrem Training herausholen. Mit unserem einfach zu bedienenden Planungs-Tool und der breiten Palette an Trainingsmöglichkeiten ist es noch nie einfacher gewesen, Ihre körperliche Fitness zu verbessern. Machen Sie noch heute den nächsten Schritt auf Ihrem Fitnessweg und starten Sie Ihre Reise mit uns!</p>
     </div>
   </div>
 </section>
-
-
-
-
-
 
 <!-- Section Two -->
 <section class="section-two">
   <div class="section-two-content">
     <div class="section-two-left">
-      <h2>Section Two Title</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at placerat elit. Pellentesque blandit, magna eu pretium suscipit, nulla metus ultricies tellus, vel tincidunt elit felis id leo. Donec posuere mauris eget laoreet eleifend. Donec eu viverra tortor.</p>
+      <h2>Let us help you <br>
+        achive everything!</h2>
+      <p id="section-two-left-p">APEX GmbH <br><br>
+
+        0664 1234567 <br><br>
+        
+        kontakt@apex.com <br><br>
+        
+        Wexstraße 19-23, 1200 Wien</p>
     </div>
     <div class="section-two-right">
-      <img src="logo.jpg" alt="Right Image">
+      <img id="section-two-right-img" src="map.png" alt="Right Image">
     </div>
   </div>
 </section>
@@ -69,168 +288,6 @@
     <p>Impressum</p>
   </div>
 </footer>
+</body>
+</html>
 
-
-<!-- Styles -->
-<style>
-  /* Navigation Bar */
-
-.section-one-content{
-  display: flex;
-  justify-content: center;
-  flex-direction:row;
-  align-items:center;
-/*IDEA: width und */
-	object-fit: cover;
-}
-.section-one-left{
-  padding-left:5rem;
-  float: left;
-}
-#imgSectionOne{
-  width:50%;
-  height:50%;
-}
-.section-one-right{
-  width: 50%;
-  float: right;
-}
-
-section-two-content{
-  display: flex;
-  align-items: center;
-}
-.section-two-left{
-  width: 50%;
-   float: left;
-}
-.section-two-right{
-  width: 50%;
-  float: right;
-}
-
-
-
-
-
-
-
-
-
-
-
-  body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-
-  .main-header{
-    position: relative;
-	width: 100%;
-	height: 100vh;
-  }
-
-.header-background{
-  position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
-.header-content{
-  position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	color: white;
-	text-align: center;
-	font-size: 3rem;
-	font-weight: bold;
-	text-shadow: 2px 2px #000000;
-}
-
-
-
-#homeT,#planT,#specialT{
-  padding: 0.5rem;
-}
-
-
-.navigation{
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: #fff;
-  z-index: 100;
-}
-
-
-  nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #000000;
-    color: #fff;
-    padding: 1rem;
-    font-family:Andale Mono, monospace;
-    letter-spacing: 2px;
-  }
-
-  .logo img {
-    height: 50px;
-    filter: grayscale(100%);
-  }
-
-  .nav-links {
-    display: flex;
-    list-style: none;
-
-  }
-
-  .nav-links li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.2rem;
-    border:none;
-    padding: 0.5rem;
-  }
-  .nav-links li a:hover{
-    border: 1px solid #fff;
-  }
-
-  .profile a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.2rem;
-    border: none;
-    padding: 0.5rem;
-    margin-right:5rem;
-  }
-  .profile a:hover{
-    border: 1px solid #fff;
-  }
-
-  h1 {
-  font-family: "Arial Black", sans-serif;
-  }
-
-  /* Main Header */
-  .main-header {
-    height: 100vh;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .header-background img {
-    position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  }
-
-
-</style>
