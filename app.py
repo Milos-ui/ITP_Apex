@@ -1,10 +1,13 @@
-from flask import Flask, send_file
+from flask import Flask, jsonify, send_file
 from flask import render_template
 from flask import request
 from markupsafe import escape
 import json
 
-import mysqlx
+
+import bcrypt
+import mysql.connector
+
 app = Flask(__name__)
 daten = {}
 
@@ -47,29 +50,64 @@ def trainingsplan_post():
 
 @app.get('/trainingsplan')
 def trainingsplan_get():
-    return json.dump(daten)
+    return jsonify(daten)
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_PORT'] = 3306
-app.config['MYSQL_USER'] = 'root'  # Benutzername der Datenbank
-app.config['MYSQL_PASSWORD'] = 'admin'  # Passwort der Datenbank
-app.config['MYSQL_DB'] = 'Login'  # Name der Datenbank
-mysql = mysqlx(app)
-@app.route('/login', methods=['GET', 'POST'])
-def login():
+
+
+
+# MySQL Verbindung herstellen
+db = mysql.connector.connect(
+    host='localhost',
+    user='root',
+    password='admin',
+    database='Login'
+)
+
+@app.post('/registrieren')
+def registrieren():
     if request.method == 'POST':
         # Daten aus dem Formular abrufen
         username = request.form['username']
         password = request.form['password']
 
+        salt = bcrypt.gensalt()
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
+
         # Daten in der Datenbank speichern
-        cursor = mysql.connection.cursor()
-        cursor.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (username, password))
-        mysql.connection.commit()
+        query = "INSERT INTO users (username, password) VALUES (%s, %s)"
+        values = (username, hashed_password)
+
+        # Datenbankabfrage ausführen
+        cursor = db.cursor()
+        cursor.execute(query, values)
+        db.commit()
         cursor.close()
+
 
         # Erfolgsmeldung anzeigen
         return 'Registrierung erfolgreich'
-
+    
     # HTML-Formular anzeigen
+    return render_template('indexTest.html')
+
+@app.post('/login')
+def login():
+    if request.method == 'POST':
+        # Daten aus dem Formular abrufen
+        username = request.form.get('username')
+        password = request.form.get('password')
+
+        # Daten aus der Datenbank abrufen
+        cursor = db.cursor()
+        cursor.execute("SELECT * FROM users WHERE username = %s AND password = %s", (username, password))
+        user = cursor.fetchone()
+        cursor.close()
+
+        # Überprüfen, ob ein Benutzer gefunden wurde und einloggen
+        if user:
+            return 'Login erfolgreich'
+        else:
+            return 'Login fehlgeschlagen'
+
+        # HTML-Formular anzeigen
     return render_template('login.html')
