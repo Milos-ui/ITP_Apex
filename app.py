@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, send_file
 from flask import render_template
 from flask import request
+from flask import redirect, url_for
 from markupsafe import escape
 import json
 
@@ -89,8 +90,10 @@ def registrieren():
     # HTML-Formular anzeigen
     return render_template('login.html')
 
-@app.post('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    error_message = None
+
     if request.method == 'POST':
         # Daten aus dem Formular abrufen
         username = request.form['username']
@@ -111,11 +114,10 @@ def login():
                 # Passwörter stimmen überein, erfolgreicher Login
                 return render_template('indexTest.html')
             else:
-                # Passwörter stimmen nicht überein, fehlgeschlagener Login
-                return 'Login fehlgeschlagen'
+               error_message = 'Benutzername oder Passwort ist falsch'
+               return render_template('login.html', error=error_message)
         else:
-            # Benutzer nicht gefunden, fehlgeschlagener Login
-            return 'Login fehlgeschlagen'
-
+            error_message = 'Benutzername oder Passwort ist falsch'
+            return render_template('login.html', error=error_message)
     # HTML-Formular anzeigen
     return render_template('login.html')

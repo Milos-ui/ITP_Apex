@@ -68,6 +68,9 @@
   <body>
     <div class="form-container">
       <h1>Login</h1>
+      {% if error %}
+        <p style="color: red;">{{ error }}</p>
+      {% endif %}
       <form action="http://127.0.0.1:5000/login" method="post">
         <label for="username">Benutzername:</label>
         <input type="text" name="username" id="username" placeholder="Benutzername">
