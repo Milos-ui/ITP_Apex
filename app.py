@@ -63,7 +63,7 @@ db = mysql.connector.connect(
     database='Login'
 )
 
-@app.post('/registrieren')
+@app.route('/registrieren', methods=['GET', 'POST'])
 def registrieren():
     if request.method == 'POST':
         # Daten aus dem Formular abrufen
@@ -71,7 +71,7 @@ def registrieren():
         password = request.form['password']
 
         salt = bcrypt.gensalt()
-        hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), bytes(salt))
 
         # Daten in der Datenbank speichern
         query = "INSERT INTO users (username, password) VALUES (%s, %s)"
@@ -85,29 +85,37 @@ def registrieren():
 
 
         # Erfolgsmeldung anzeigen
-        return 'Registrierung erfolgreich'
     
     # HTML-Formular anzeigen
-    return render_template('indexTest.html')
+    return render_template('login.html')
 
 @app.post('/login')
 def login():
     if request.method == 'POST':
         # Daten aus dem Formular abrufen
-        username = request.form.get('username')
-        password = request.form.get('password')
+        username = request.form['username']
+        password = request.form['password']
 
         # Daten aus der Datenbank abrufen
         cursor = db.cursor()
-        cursor.execute("SELECT * FROM users WHERE username = %s AND password = %s", (username, password))
-        user = cursor.fetchone()
+        cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
+        user = cursor.fetchall()
         cursor.close()
 
-        # Überprüfen, ob ein Benutzer gefunden wurde und einloggen
         if user:
-            return 'Login erfolgreich'
+            stored_password = user[0][2]  # Gespeichertes bcrypt-verschlüsseltes Passwort aus der Datenbank
+            entered_password = password.encode('utf-8')  # Eingegebenes Klartext-Passwort als bytes
+
+            # Passwortvergleich durchführen
+            if bcrypt.hashpw(entered_password, bytes(stored_password)) == stored_password:
+                # Passwörter stimmen überein, erfolgreicher Login
+                return render_template('indexTest.html')
+            else:
+                # Passwörter stimmen nicht überein, fehlgeschlagener Login
+                return 'Login fehlgeschlagen'
         else:
+            # Benutzer nicht gefunden, fehlgeschlagener Login
             return 'Login fehlgeschlagen'
 
-        # HTML-Formular anzeigen
+    # HTML-Formular anzeigen
     return render_template('login.html')
