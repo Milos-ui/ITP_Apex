@@ -1,18 +1,26 @@
-from flask import Flask, send_file
+from flask import Flask, jsonify, send_file
 from flask import render_template
 from flask import request
+from flask import redirect, url_for
 from markupsafe import escape
 import json
+
+
+import bcrypt
+import mysql.connector
+
 app = Flask(__name__)
 daten = {}
 
 @app.post('/trainingsplan')
 def trainingsplan_post():
+    # Überprüfen, ob alle Formulardaten vorhanden sind
     if(request.form.get('sportDrop') == None or request.form.get('timeInvest') == None or request.form.get('goal') == None or request.form.get('weight') == None
     or request.form.get('height') == None or request.form.get('age') == None or request.form.get('gender') == None or request.form.get('fitLevel') == None):
         print('Error: Nicht alle Felder ausgefüllt')
         return 'Error: Nicht alle Felder ausgefüllt'
     
+    # Speichern der Formulardaten im "daten" Dictionary
     daten = {
         'sportDrop': request.form['sportDrop'],
         'timeInvest': request.form['timeInvest'],
@@ -24,6 +32,7 @@ def trainingsplan_post():
         'fitLevel': request.form['fitLevel']
     }
 
+    # Festlegen des Dateipfads basierend auf der ausgewählten Sportart
     if(daten['sportDrop'] == 'Laufen'):
         filepath = 'daten/Trainingsplan1.pdf'
     elif(daten['sportDrop'] == 'Radfahren'):
@@ -36,9 +45,79 @@ def trainingsplan_post():
         print('Error: Sportart nicht angegeben')
         return 'Error: Sportart nicht angegeben'
 
+    # Datei als Anhang zurückgeben
     return send_file(filepath, as_attachment=True)
 
 
 @app.get('/trainingsplan')
 def trainingsplan_get():
-    return json.dump(daten)
+    return jsonify(daten)
+
+
+
+
+# MySQL Verbindung herstellen
+db = mysql.connector.connect(
+    host='localhost',
+    user='root',
+    password='admin',
+    database='Login'
+)
+
+@app.route('/registrieren', methods=['GET', 'POST'])
+def registrieren():
+    if request.method == 'POST':
+        # Daten aus dem Formular abrufen
+        username = request.form['username']
+        password = request.form['password']
+
+        salt = bcrypt.gensalt()
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), bytes(salt))
+
+        # Daten in der Datenbank speichern
+        query = "INSERT INTO users (username, password) VALUES (%s, %s)"
+        values = (username, hashed_password)
+
+        # Datenbankabfrage ausführen
+        cursor = db.cursor()
+        cursor.execute(query, values)
+        db.commit()
+        cursor.close()
+
+
+        # Erfolgsmeldung anzeigen
+    
+    # HTML-Formular anzeigen
+    return render_template('login.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error_message = None
+
+    if request.method == 'POST':
+        # Daten aus dem Formular abrufen
+        username = request.form['username']
+        password = request.form['password']
+
+        # Daten aus der Datenbank abrufen
+        cursor = db.cursor()
+        cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
+        user = cursor.fetchall()
+        cursor.close()
+
+        if user:
+            stored_password = user[0][2]  # Gespeichertes bcrypt-verschlüsseltes Passwort aus der Datenbank
+            entered_password = password.encode('utf-8')  # Eingegebenes Klartext-Passwort als bytes
+
+            # Passwortvergleich durchführen
+            if bcrypt.hashpw(entered_password, bytes(stored_password)) == stored_password:
+                # Passwörter stimmen überein, erfolgreicher Login
+                return render_template('indexTest.html')
+            else:
+               error_message = 'Benutzername oder Passwort ist falsch'
+               return render_template('login.html', error=error_message)
+        else:
+            error_message = 'Benutzername oder Passwort ist falsch'
+            return render_template('login.html', error=error_message)
+    # HTML-Formular anzeigen
+    return render_template('login.html')
