@@ -120,6 +120,9 @@ def login_or_register():
 def render_login():
     return render_template('login.html')
 
+@app.route('/download_pdf')
+def download_pdf():
+    return send_file('/Users/johnyhamsik12/ITP.Projekt/ITP_Apex/daten/Trainingsplan1.pdf', as_attachment=True)
 """ @app.route('/registrieren', methods=['GET', 'POST'])
 def registrieren():
     if request.method == 'POST':
