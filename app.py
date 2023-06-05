@@ -85,11 +85,9 @@ def login_or_register():
                 stored_password = user[0][2]  # Gespeichertes bcrypt-verschlüsseltes Passwort aus der Datenbank
                 entered_password = password.encode('utf-8')  # Eingegebenes Klartext-Passwort als bytes
 
-                # Passwortvergleich durchführen
-
-                if bcrypt.checkpw(entered_password, bytes(stored_password)):
+                if bcrypt.hashpw(entered_password, bytes(stored_password)) == stored_password:
                     # Passwörter stimmen überein, erfolgreicher Login
-                    return render_template('indexTest.html')
+                    return render_template('trainingsplan.html')
                 else:
                     error_message = 'Benutzername oder Passwort ist falsch'
                     return render_template('login.html', error=error_message)
@@ -117,3 +115,65 @@ def login_or_register():
     
     # HTML-Formular anzeigen und Fehlermeldung übergeben
     return render_template('login.html', error=error_message)
+
+@app.route('/login')
+def render_login():
+    return render_template('login.html')
+
+""" @app.route('/registrieren', methods=['GET', 'POST'])
+def registrieren():
+    if request.method == 'POST':
+        # Daten aus dem Formular abrufen
+        username = request.form['username']
+        password = request.form['password']
+
+        salt = bcrypt.gensalt()
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), bytes(salt))
+
+        # Daten in der Datenbank speichern
+        query = "INSERT INTO users (username, password) VALUES (%s, %s)"
+        values = (username, hashed_password)
+
+        # Datenbankabfrage ausführen
+        cursor = db.cursor()
+        cursor.execute(query, values)
+        db.commit()
+        cursor.close()
+
+
+        # Erfolgsmeldung anzeigen
+    
+    # HTML-Formular anzeigen
+    return render_template('login.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error_message = None
+
+    if request.method == 'POST':
+        # Daten aus dem Formular abrufen
+        username = request.form['username']
+        password = request.form['password']
+
+        # Daten aus der Datenbank abrufen
+        cursor = db.cursor()
+        cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
+        user = cursor.fetchall()
+        cursor.close()
+
+        if user:
+            stored_password = user[0][2]  # Gespeichertes bcrypt-verschlüsseltes Passwort aus der Datenbank
+            entered_password = password.encode('utf-8')  # Eingegebenes Klartext-Passwort als bytes
+
+            # Passwortvergleich durchführen
+            if bcrypt.hashpw(entered_password, bytes(stored_password)) == stored_password:
+                # Passwörter stimmen überein, erfolgreicher Login
+                return render_template('indexTest.html')
+            else:
+               error_message = 'Benutzername oder Passwort ist falsch'
+               return render_template('login.html', error=error_message)
+        else:
+            error_message = 'Benutzername oder Passwort ist falsch'
+            return render_template('login.html', error=error_message)
+    # HTML-Formular anzeigen
+    return render_template('login.html') """
