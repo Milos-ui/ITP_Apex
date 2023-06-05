@@ -67,27 +67,17 @@
   </head>
   <body>
     <div class="form-container">
-      <h1>Login</h1>
+      <h1>Login / Registrieren</h1>
       {% if error %}
-        <p style="color: red;">{{ error }}</p>
+        <p>{{ error }}</p>
       {% endif %}
-      <form action="http://127.0.0.1:5000/login" method="post">
+      <form action="http://127.0.0.1:5000/" method="post">
         <label for="username">Benutzername:</label>
         <input type="text" name="username" id="username" placeholder="Benutzername">
         <label for="password">Passwort:</label>
         <input type="password" name="password" id="password" placeholder="Passwort">
-        <button type="submit">Login</button>
-      </form>
-    </div>
-
-    <div class="form-container">
-      <h1>Registrieren</h1>
-      <form action="http://127.0.0.1:5000/registrieren" method="post">
-        <label for="reg-username">Benutzername:</label>
-        <input type="text" name="username" id="reg-username" placeholder="Benutzername">
-        <label for="reg-password">Passwort:</label>
-        <input type="password" name="password" id="reg-password" placeholder="Passwort">
-        <button type="submit">Registrieren</button>
+        <button type="submit" name="action" value="login">Login</button>
+        <button type="submit" name="action" value="registrieren">Registrieren</button>
       </form>
     </div>
   </body>
