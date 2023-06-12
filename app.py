@@ -55,7 +55,7 @@ def trainingsplan_get():
 
 
 
-"""
+
 # MySQL Verbindung herstellen
 db = mysql.connector.connect(
     host='localhost',
@@ -63,7 +63,6 @@ db = mysql.connector.connect(
     password='admin',
     database='Login'
 )
-"""
 
 @app.route('/', methods=['GET', 'POST'])
 def login_or_register():
@@ -125,14 +124,15 @@ def render_login():
 def download_pdf():
     dropBox = request.form['sportDrop']
     filepath = ''
+    print(dropBox)
     if(dropBox == 'Kraftsport'):
-        filepath = '/daten/Kraftsport.pdf'
+        filepath = '../daten/Kraftsport.pdf'
     elif(dropBox == 'HIIT'):
-        filepath = 'daten/HIIT.pdf'
+        filepath = '../daten/HIIT.pdf'
     elif(dropBox == 'Kraftausdauer'):
-        filepath = 'daten/Kraftausdauer.pdf'
+        filepath = '../daten/Kraftausdauer.pdf'
     elif(dropBox == 'Anderes'):
-        filepath = 'daten/Trainingsplan1.pdf'
+        filepath = '../daten/Trainingsplan1.pdf'
     else:
         print('Error: Sportart nicht angegeben')
         return 'Error: Sportart nicht angegeben'
