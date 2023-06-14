@@ -120,6 +120,18 @@ def login_or_register():
 def render_login():
     return render_template('login.html')
 
+@app.route('/index')
+def render_index():
+    return render_template('index.html')
+
+@app.route('/trainingsplan')
+def render_trainingsplan():
+    return render_template('trainingsplan.html')
+
+@app.route('/info')
+def render_info():
+    return render_template('info.html')
+
 @app.route('/download_pdf')
 def download_pdf():
     dropBox = request.form['sportDrop']
