@@ -138,14 +138,19 @@ def download_pdf():
     filepath = ''
     print(dropBox)
     if(dropBox == 'Kraftsport'):
-        filepath = '../daten/Kraftsport.pdf'
+        filepath = './daten/Kraftsport.pdf'
     elif(dropBox == 'HIIT'):
-        filepath = '../daten/HIIT.pdf'
+        filepath = './daten/HIIT.pdf'
     elif(dropBox == 'Kraftausdauer'):
-        filepath = '../daten/Kraftausdauer.pdf'
+        filepath = './daten/Kraftausdauer.pdf'
     elif(dropBox == 'Anderes'):
-        filepath = '../daten/Trainingsplan1.pdf'
+        filepath = './daten/Trainingsplan1.pdf'
     else:
         print('Error: Sportart nicht angegeben')
         return 'Error: Sportart nicht angegeben'
+    return send_file(filepath, as_attachment=True)
+
+@app.route('/download_pdf1')
+def download_pdf1():
+    filepath = './daten/Trainingsplan1.pdf'
     return send_file(filepath, as_attachment=True)
